@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import CardData from '../data/cardData';
+import type { CardData } from '../data/cardData';
 import cardData from "../data/data.json";
 ---
 
@@ -45,7 +45,6 @@ import cardData from "../data/data.json";
 				.sort((a: CardData, b: CardData) => b.voteNumber - a.voteNumber) // Sort in descending order	
 				.map((card: CardData) => (
 					<Card
-					key={card.id}
 					href={card.href}
 					title={card.title}
 					body={card.body}
