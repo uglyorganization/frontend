@@ -1,5 +1,5 @@
 export interface UserData {
-	"user": "string";
+	"user": string;
 	"totalVotes": number;
 	"numberPosts": number;
 	"maxVotes": number;
