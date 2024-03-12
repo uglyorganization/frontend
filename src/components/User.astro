@@ -1,0 +1,136 @@
+---
+interface Props {
+	"user": string;
+	"totalVotes": number;
+	"numberPosts": number;
+	"maxVotes": number;
+}
+
+const { user, totalVotes, numberPosts, maxVotes } = Astro.props;
+
+const roundToTwoDecimals = (number: number) => Math.round(number * 100) / 100;
+
+const avgVotes = typeof totalVotes === 'number' && typeof numberPosts === 'number'
+  ? roundToTwoDecimals(totalVotes / numberPosts)
+  : 0;
+
+---
+
+<li class="link-card">
+    <h2>
+      {user}
+    </h2>
+    <div class="extra-info">
+	<div class="info-box">
+            <label>Total Votes:</label>
+            <span>{totalVotes}</span>
+        </div>
+        <div class="info-box">
+            <label>Max Votes:</label>
+            <span>{maxVotes}</span>
+        </div>
+        <div class="info-box">
+            <label>Number Posts:</label>
+            <span>{numberPosts}</span>
+        </div>
+        <div class="info-box">
+            <label>Avg Votes:</label>
+            <span>{avgVotes}</span>
+        </div>
+    </div>
+</li>
+
+
+<style>
+.link-card {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    padding: 1px;
+    background-color: #23262d;
+    background-image: none;
+    background-size: 400%;
+    border-radius: 7px;
+    background-position: 100%;
+    transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    text-align: left; /* Align text to the left */
+}
+
+.vote-number {
+    position: relative;
+    top: 8px;
+    right: 8px;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    width: 1.5rem;
+    text-align: center;
+}
+
+.link-card > a {
+    flex: 1;
+    text-decoration: none;
+    line-height: 1.4;
+    padding: calc(1.5rem - 1px);
+    border-radius: 8px;
+    color: white;
+    background-color: #23262d;
+    opacity: 0.8;
+    text-align: center;
+}
+
+h2 {
+    margin: 0.5rem 1rem 0.5rem 2rem; /* Add more margin top and bottom */
+    font-size: 1.25rem;
+    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+p {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.link-card:is(:hover, :focus-within) {
+    background-position: 0;
+    background-image: var(--accent-gradient);
+}
+
+.link-card:is(:hover, :focus-within) h2 {
+    color: rgb(var(--accent-light));
+}
+
+/* Add styles for extra-info */
+.extra-info {
+    display: flex;
+    flex: 1; /* Take up remaining space */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 7px;
+    text-align: left; /* Align text to the left */
+}
+
+.info-box {
+    flex: 1;
+    border-radius: 7px;
+    padding: 0.5rem;
+    color: white;
+    text-align: center;
+    text-align: left;
+}
+
+.info-box label {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-box span {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+</style>

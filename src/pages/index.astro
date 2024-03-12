@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import type { CardData } from '../data/cardData';
-import cardData from "../data/data.json";
+import User from '../components/User.astro';
+import type { UserData } from '../data/userData';
+import userData from "../data/users.json";
 ---
 
 <Layout title="the ugly organization">
@@ -41,14 +41,14 @@ import cardData from "../data/data.json";
 		</p>
 		<ul role="list" class="link-card-grid">
 			{
-				cardData
-				.sort((a: CardData, b: CardData) => b.voteNumber - a.voteNumber) // Sort in descending order	
-				.map((card: CardData) => (
-					<Card
-					href={card.href}
-					title={card.title}
-					body={card.body}
-					voteNumber={card.voteNumber}
+				userData
+				.sort((a: UserData, b: UserData) => b.totalVotes - a.totalVotes) 
+				.map((user: UserData) => (
+					<User
+					user={user.user}
+					totalVotes={user.totalVotes}
+					numberPosts={user.numberPosts}
+					maxVotes={user.maxVotes}
 					/>
 				))}	
 		</ul>
