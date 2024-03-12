@@ -1,0 +1,17 @@
+name: Process Dispatched Event
+
+on:
+  repository_dispatch:
+    types: ["trigger-deploy"]
+
+jobs:
+  process_event:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Write JSON to file
+        run: |
+          echo "${{ github.event.client_payload }}" > ./src/data/users.json
