@@ -2,7 +2,7 @@ name: Process Dispatched Event
 
 on:
   repository_dispatch:
-    types: [trigger-deploy]
+    types: ["trigger-deploy"]
 
 jobs:
   process_event:
@@ -14,5 +14,4 @@ jobs:
 
       - name: Write JSON to file
         run: |
-          echo "${{ toJson(github.event.client_payload) }}" > ./src/data/users.json
-
+          echo "${{ github.event.client_payload }}" > ./src/data/users.json
